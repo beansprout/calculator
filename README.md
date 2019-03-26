@@ -41,3 +41,5 @@ EXTRA CREDIT: Make it look nice! This can be a good portfolio project… but not
 EXTRA CREDIT: Add a “backspace” button, so the user can undo if they click the wrong number.
 
 EXTRA CREDIT: Add keyboard support!
+
+Sound effect obtained from https://zapsplat.com

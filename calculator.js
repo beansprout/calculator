@@ -3,7 +3,7 @@ const add = (x , y) => {
 }
 
 const subtract = (x, y) => {
-  return Number(x) - Number(y);
+  return Number(y) - Number(x);
 }
 
 const multiply = (x, y) => {
@@ -21,6 +21,9 @@ const divide = (x, y) => {
 const equals = () => {
   if (operation === 'add') {
     total = add(numX, numY);
+  }
+  if (operation === 'minus') {
+    total = subtract(numX, numY);
   }
   calculatorScreen.innerHTML = total;
     numY = total;
@@ -73,7 +76,6 @@ const operBtnSequence = () => {
   if (calculatorScreen.innerHTML !== '0') {
     clearScreen();
   }
-
 }
 
 const addNumListeners = () => {
@@ -92,6 +94,9 @@ addNumListeners();
 
 clear.addEventListener('click', (e) => {
   numX ='';
+  numY ='';
+  total ='';
+  operation ='';
   calculatorScreen.innerHTML = '0';
   blip.play()
 });
@@ -106,7 +111,22 @@ plusBtn.addEventListener('click', (e) => {
     operation = 'add';
     equals();
   }
-})
+});
+
+minusBtn.addEventListener('click', (e) => {
+  console.log('minus')
+  operBtnSequence();
+  if (numY === '') {
+    numY = numX;
+    numX = '';
+    operation = 'minus';
+  } else {
+    operation = 'minus';
+    equals();
+  }
+});
+
+
 
 equalsBtn.addEventListener('click', (e) => {
   operBtnSequence();

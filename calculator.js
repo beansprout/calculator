@@ -123,12 +123,21 @@ const addNumListeners = () => {
         numX = numX.concat(i);
       }
       console.log(`numX ${numX}`);
-      calculatorScreen.innerHTML = numX
+      calculatorScreen.innerHTML = numX;
       blip.play();
     })
   }
 }
 addNumListeners();
+
+decimalBtn.addEventListener('click', (e) => {
+  if (numX === '') {
+    numX = '0';
+  }
+  numX = numX.concat('.');
+  calculatorScreen.innerHTML = numX;
+  blip.play();
+})
 
 clear.addEventListener('click', (e) => {
   numX ='';
@@ -158,8 +167,6 @@ divideBtn.addEventListener('click', (e) => {
   console.log('divide')
   operBtnSequence('divide');
 });
-
-
 
 equalsBtn.addEventListener('click', (e) => {
   operBtnSequence(lastOperation);

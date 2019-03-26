@@ -11,7 +11,7 @@ const multiply = (x, y) => {
 }
 
 const divide = (x, y) => {
-  return Number(x) / Number(y);
+  return Number(y) / Number(x);
 }
 
 // const operate = (x , y, operation()) => {
@@ -24,6 +24,12 @@ const equals = () => {
   }
   if (operation === 'minus') {
     total = subtract(numX, numY);
+  }
+  if (operation === 'multiply') {
+    total = multiply(numX, numY);
+  }
+  if (operation === 'divide') {
+    total = divide(numX, numY);
   }
   calculatorScreen.innerHTML = total;
     numY = total;
@@ -83,7 +89,11 @@ const addNumListeners = () => {
   // console.log(numButton);
   for (let i = 0; i < 10; i++) {
     document.getElementById(`div${i}`).addEventListener('click', (e) => {
-      numX = numX.concat(i);
+      if (calculatorScreen.innerHTML === '0') {
+        numX = i.toString();
+      } else {
+        numX = numX.concat(i);
+      }
       console.log(numX);
       calculatorScreen.innerHTML = numX
       blip.play();
@@ -114,7 +124,6 @@ plusBtn.addEventListener('click', (e) => {
 });
 
 minusBtn.addEventListener('click', (e) => {
-  console.log('minus')
   operBtnSequence();
   if (numY === '') {
     numY = numX;
@@ -122,6 +131,37 @@ minusBtn.addEventListener('click', (e) => {
     operation = 'minus';
   } else {
     operation = 'minus';
+    equals();
+  }
+});
+
+multiplyBtn.addEventListener('click', (e) => {
+  console.log('mult')
+  operBtnSequence();
+  if (numY === '') {
+    numY = numX;
+    numX = '';
+    operation = 'multiply';
+  } else {
+    operation = 'multiply';
+    equals();
+  }
+});
+
+divideBtn.addEventListener('click', (e) => {
+  console.log('divide')
+  operBtnSequence();
+  if (numY === '') {
+    numY = numX;
+    if (numY === '0') {
+      console.log('numY = 0')
+      clearScreen();
+      return alert('Dividing by zero is a no-no.  Your work has been cleared.  Start over - sorry \'bout it.')
+    }
+    numX = '';
+    operation = 'divide';
+  } else {
+    operation = 'divide';
     equals();
   }
 });

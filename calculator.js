@@ -1,38 +1,30 @@
 const add = (x , y) => {
-  console.log(`x ${x} + y ${y}`);
   return Number(x) + Number(y);
 }
 
 const subtract = (x, y) => {
-  console.log(`y ${y} - x ${x}`);
   return Number(y) - Number(x);
 }
 
 const multiply = (x, y) => {
-  console.log(`x ${x} * y ${y}`);
   return Number(x) * Number(y);
 }
 
 const divide = (x, y) => {
-  console.log(`y ${y} / x ${x}`);
   return Number(y) / Number(x);
 }
 
 const equals = (op) => {
   if (operation === 'add') {
-    console.log('total = ')
     total = add(numX, numY);
   }
   if (operation === 'minus') {
-    console.log('total = ')
     total = subtract(numX, numY);
   }
   if (operation === 'multiply') {
-    console.log('total = ')
     total = multiply(numX, numY);
   }
   if (operation === 'divide') {
-    console.log('total = ')
     total = divide(numX, numY);
   }
   if (total.toString().length > 13) {
@@ -89,9 +81,6 @@ const clearScreen = () => {
 const operBtnSequence = (op) => {
   flashScreen();
   blip.play();
-  // if (calculatorScreen.innerHTML !== '0') {
-  //   clearScreen();
-  // }
   if (operation === '') {
     operation = op;
     lastOperation = op;
@@ -101,10 +90,8 @@ const operBtnSequence = (op) => {
   };
   if (numY === '') {
     numY = numX;
-    console.log(`numY ${numY}`);
     numX = '';
   } else if (numY == 0 && op === 'divide') {
-    console.log('numY = 0')
     clearScreen();
     return alert('Dividing by zero is a no-no.  Your work has been cleared.  Start over - sorry \'bout it.')
   } else {
@@ -113,8 +100,6 @@ const operBtnSequence = (op) => {
 }
 
 const addNumListeners = () => {
-  // const numButton = document.querySelectorAll('div.num-btn');
-  // console.log(numButton);
   for (let i = 0; i < 10; i++) {
     document.getElementById(`div${i}`).addEventListener('click', (e) => {
       if (calculatorScreen.innerHTML === '0') {
@@ -122,7 +107,6 @@ const addNumListeners = () => {
       } else {
         numX = numX.concat(i);
       }
-      console.log(`numX ${numX}`);
       calculatorScreen.innerHTML = numX;
       blip.play();
     })
@@ -150,22 +134,18 @@ clear.addEventListener('click', (e) => {
 });
 
 plusBtn.addEventListener('click', (e) => {
-  console.log('add')
   operBtnSequence('add');
 });
 
 minusBtn.addEventListener('click', (e) => {
-  console.log('minus')
   operBtnSequence('minus');
 });
 
 multiplyBtn.addEventListener('click', (e) => {
-  console.log('mult')
   operBtnSequence('multiply');
 });
 
 divideBtn.addEventListener('click', (e) => {
-  console.log('divide')
   operBtnSequence('divide');
 });
 

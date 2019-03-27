@@ -18,10 +18,6 @@ const divide = (x, y) => {
   return Number(y) / Number(x);
 }
 
-// const operate = (x , y, operation()) => {
-//   return operation(Number(x), Number(y));
-// }
-
 const equals = (op) => {
   if (operation === 'add') {
     console.log('total = ')
@@ -39,10 +35,15 @@ const equals = (op) => {
     console.log('total = ')
     total = divide(numX, numY);
   }
+  if (total.toString().length > 13) {
+    console.log('total = '+ total)
+    calculatorScreen.style.fontSize = '42px';
+    total = Number(total.toString().slice(0, 17));
+  }
   calculatorScreen.innerHTML = total;
     numY = total;
     total = '';
-    numX ='';
+    numX = total;
 }
 
 const blip = new Audio();
@@ -88,9 +89,9 @@ const clearScreen = () => {
 const operBtnSequence = (op) => {
   flashScreen();
   blip.play();
-  if (calculatorScreen.innerHTML !== '0') {
-    clearScreen();
-  }
+  // if (calculatorScreen.innerHTML !== '0') {
+  //   clearScreen();
+  // }
   if (operation === '') {
     operation = op;
     lastOperation = op;
@@ -101,12 +102,11 @@ const operBtnSequence = (op) => {
   if (numY === '') {
     numY = numX;
     console.log(`numY ${numY}`);
-    if (numY === '0' && op === 'divide') {
-      console.log('numY = 0')
-      clearScreen();
-      return alert('Dividing by zero is a no-no.  Your work has been cleared.  Start over - sorry \'bout it.')
-    }
     numX = '';
+  } else if (numY == 0 && op === 'divide') {
+    console.log('numY = 0')
+    clearScreen();
+    return alert('Dividing by zero is a no-no.  Your work has been cleared.  Start over - sorry \'bout it.')
   } else {
     equals();
   }
@@ -145,6 +145,7 @@ clear.addEventListener('click', (e) => {
   total ='';
   operation ='';
   calculatorScreen.innerHTML = '0';
+  calculatorScreen.style.fontSize = '58px';
   blip.play()
 });
 

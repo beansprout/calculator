@@ -7,10 +7,17 @@ h1 {
   text-align: center;
 }
 
-#container {
-  margin: 0 auto;
-  width: 425px;
+.container {
+  margin: 10px auto;
 }
+
+#container {
+  width: 425px;
+  height: 740px;
+  background-image: linear-gradient(to bottom right, #654ea3, #FBEAFF);
+  border-radius: 20px;
+}
+
 .button {
   text-align: center;
   background: #FF6F91;
@@ -37,6 +44,7 @@ h1 {
   text-align: right;
   padding-right: 24px;
   transform: none;
+  margin: 6px;
 }
 
 #calculator-buttons {
@@ -44,17 +52,37 @@ h1 {
   grid-template-columns: repeat(4, 100px);
   grid-template-rows: repeat(4, 100px);
   grid-gap: 4px;
+  margin: 6px;
 }
 
 #equals {
   background: #F9F871;
 }
 
-#clear {
-  width: 392px;
+.btn-bottom {
+  display: inline-block;
+  width: 182px;
   height: 80px;
   margin-top: 8px;
-  background: #D65DB1;
-  font-size: 48px;
+  background: #eaafc8;
+  font-size: 34px;
+  margin: 2px;
 }
 
+#clear {
+  margin-left: 6px;
+}
+
+#long-form {
+  font-family: 'Overpass Mono', monospace;
+  margin: 80px auto;
+  background: #8D6EAD;
+  transition: none;
+  height: 36px;
+  width: 60%;
+  font-size: 24px;
+  border-radius: 10px;
+  color: #FBEAFF;
+  text-align: right;
+  padding: 10px;
+}

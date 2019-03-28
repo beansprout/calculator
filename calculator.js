@@ -68,7 +68,7 @@ const clear = document.getElementById('clear');
 const backspace = document.getElementById('backspace');
 const longForm = document.getElementById('long-form');
 
-let numX ='';
+let numX ='0';
 let numY = '';
 let longFormNum ='';
 let total = '';

@@ -109,25 +109,20 @@ const operBtnSequence = (op) => {
   }
 }
 
-const addNumListeners = () => {
-  for (let i = 0; i < 10; i++) {
-    document.getElementById(`div${i}`).addEventListener('click', (e) => {
-      if (calculatorScreen.innerHTML === '0') {
-        numX = i.toString();
-        longFormNum = numX;
-      } else {
-        numX = numX.concat(i);
-        longFormNum = i.toString();
-      }
-      longForm.innerHTML += longFormNum;
-      calculatorScreen.innerHTML = numX;
-      blip.play();
-    })
+const displayNums = (i) => {
+  if (calculatorScreen.innerHTML === '0') {
+    numX = i.toString();
+    longFormNum = numX;
+  } else {
+    numX = numX.concat(i);
+    longFormNum = i.toString();
   }
+  longForm.innerHTML += longFormNum;
+  calculatorScreen.innerHTML = numX;
+  blip.play();
 }
-addNumListeners();
 
-decimalBtn.addEventListener('click', (e) => {
+const displayDecimal = () => {
   if (numX.includes('.') === true) {
     return -1;
   }
@@ -138,9 +133,9 @@ decimalBtn.addEventListener('click', (e) => {
   numX = numX.concat('.');
   calculatorScreen.innerHTML = numX;
   blip.play();
-})
+}
 
-clear.addEventListener('click', (e) => {
+const clearAll = () => {
   numX ='';
   numY ='';
   total ='';
@@ -151,9 +146,9 @@ clear.addEventListener('click', (e) => {
   equalsBtnPressed = false;
   calculatorScreen.style.fontSize = '58px';
   bubbles.play()
-});
+}
 
-backspace.addEventListener('click', (e) => {
+const backspacePress = () => {
   console.clear()
   console.log(longForm.innerHTML);
   console.log(`numX ${numX}`);
@@ -164,9 +159,86 @@ backspace.addEventListener('click', (e) => {
     calculatorScreen.innerHTML = numX;
     blip.play();
   }
+}
 
+const addNumListeners = () => {
+  for (let i = 0; i < 10; i++) {
+    document.getElementById(`div${i}`).addEventListener('click', (e) => {
+      displayNums(i);
+    })
+  }
+}
+addNumListeners();
+
+let keys = []
+
+const keysReleased = (e) => {
+  // remove entry when key keysReleased
+  keys[e.keyCode] = false;
+}
+
+const keysPressed = (e) => {
+   //store an entry for each key pressed
+  keys[e.keyCode] = true;
+    console.log(e.keyCode)
+    if (keys[16] && keys[56]) {
+      longForm.innerHTML += ' x ';
+      operBtnSequence('multiply');
+      keys[56] = false;
+    }
+    for (let i = 0; i < 10; i++) {
+      if (keys[48+i]) {
+        displayNums(i);
+      }
+    }
+    if (keys[187] && keys[16]) { // +
+      longForm.innerHTML += ' + ';
+      operBtnSequence('add');
+      keys[187] = false
+    }
+    if (keys[189]) {
+      longForm.innerHTML += ' - ';
+      operBtnSequence('minus');
+    }
+    if (keys[88]) { //*
+      longForm.innerHTML += ' x ';
+      operBtnSequence('multiply');
+    }
+    if (keys[191]) { // /
+      longForm.innerHTML += ' / ';
+      operBtnSequence('divide');
+    }
+    if (keys[190]) {
+      displayDecimal();
+      console.log('the decimal key was pressed')
+    }
+    if (keys[13] || keys[187])  { // enter
+      equalsBtnPressed = true;
+      longForm.innerHTML += ' = ';
+      operBtnSequence(lastOperation);
+    }
+    if (keys[67]) { // c key
+      clearAll();
+    }
+    if (keys[8]) { // delete key
+      backspacePress()
+    }
+  }
+
+window.addEventListener('keydown', keysPressed, false);
+window.addEventListener('keyup', keysReleased, false);
+
+decimalBtn.addEventListener('click', (e) => {
+   displayDecimal();
 })
 
+clear.addEventListener('click', (e) => {
+   clearAll();
+});
+
+backspace.addEventListener('click', (e) => {
+  backspacePress()
+})
 
 
 plusBtn.addEventListener('click', (e) => {
@@ -180,7 +252,7 @@ minusBtn.addEventListener('click', (e) => {
 });
 
 multiplyBtn.addEventListener('click', (e) => {
-  longForm.innerHTML += ' * ';
+  longForm.innerHTML += ' x ';
   operBtnSequence('multiply');
 });
 

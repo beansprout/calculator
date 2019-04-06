@@ -1,6 +1,6 @@
-#Javascript Calculator
+# Javascript Calculator
 
-##What is this?
+## What is this?
 
 Pretty and colorful calculator built with HTML, CSS, and vanilla Javascript.
 

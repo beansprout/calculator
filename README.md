@@ -14,6 +14,7 @@ Calculator built with the following capabilities/ features
 - sound effects for successful button presses
 - keeps a running list of the operation in console underneath calculator
 - keyboard support for all numbers and operations, decimal, and c for clear, delete key
+
 project idea source: https://www.theodinproject.com/courses/web-development-101/lessons/calculator
 
 
